@@ -25,23 +25,21 @@ public class OneTimePad {
 
     public static byte[] generateSecretKey(byte[] sharedSecret, int len) {
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] key = new byte[len];
             int generated = 0;
             int counter = 0;
+            byte[] currentState = sharedSecret;
 
             while (generated < len) {
-                md.update(sharedSecret);
-                md.update((byte) (counter & 0xff));
-                md.update((byte) ((counter >> 8) & 0xff));
-                md.update((byte) ((counter >> 16) & 0xff));
-                md.update((byte) ((counter >> 24) & 0xff));
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                md.update(currentState);
+                md.update((byte) counter);
                 byte[] digest = md.digest();
                 int toCopy = Math.min(digest.length, len - generated);
                 System.arraycopy(digest, 0, key, generated, toCopy);
                 generated += toCopy;
+                currentState = digest;
                 counter++;
-                md.reset();
             }
 
             return key;
