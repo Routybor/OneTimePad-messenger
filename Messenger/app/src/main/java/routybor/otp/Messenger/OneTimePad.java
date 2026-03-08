@@ -1,4 +1,4 @@
-package src;
+package routybor.otp.Messenger;
 
 import java.security.MessageDigest;
 import java.security.SecureRandom;
