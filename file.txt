@@ -1,0 +1,7 @@
+mkdir bin
+
+javac -d bin -cp bin Messenger\app\src\main\java\routybor\otp\Messenger\*.java
+
+javac -d bin -cp bin Messenger\app\src\main\java\routybor\otp\Messenger\Client.java Messenger\app\src\main\java\routybor\otp\Messenger\MessengerFrame.java Messenger\app\src\main\java\routybor\otp\Messenger\OneTimePad.java Messenger\app\src\main\java\routybor\otp\Messenger\Server.java
+
+java -cp bin routybor.otp.Messenger.MessengerFrame
